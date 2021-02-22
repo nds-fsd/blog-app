@@ -1,23 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Form from './components/form';
+import List from './components/list';
+import { handleOnDelete, handleOnSave } from './form.utils';
 
-function App() {
+const App = () => {
+  const [posts, setPosts] = useState([]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Form savePost={postInfo => handleOnSave(postInfo, posts, setPosts)} />
+      <List posts={posts} deletePost={id => handleOnDelete(id, setPosts, posts)} />
     </div>
   );
 }
